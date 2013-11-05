@@ -1,0 +1,136 @@
+syntax enable
+
+" With some ideas from Martin Brochhaus' git repo:
+" https://github.com/mbrochh/vim-as-a-python-ide
+
+" Automatic reloading of vimrc
+autocmd! bufwritepost .vimrc source %
+
+" Better copy & paste
+" " When you want to paste large blocks of code into vim, press F2 before you
+" " paste. At the bottom you should see ``-- INSERT (paste) --``.
+"
+set pastetoggle=<F2>
+set clipboard=unnamed
+
+" Rebind <Leader> key
+" " I like to have it here becuase it is easier to reach than the default and
+" " it is next to ``m`` and ``n`` which I use for navigating between tabs.
+let mapleader = ","
+
+" bind Ctrl+<movement> keys to move around the windows, instead of using
+" Ctrl+w + <movement>
+" " Every unnecessary keystroke that can be saved is good for your health :)
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
+" easier moving between tabs
+map <Leader>n <esc>:tabprevious<CR>
+map <Leader>m <esc>:tabnext<CR>
+"
+"
+" " map sort function to a key
+vnoremap <Leader>s :sort<CR>
+"
+"
+" " easier moving of code blocks
+" " Try to go into visual mode (v), thenselect several lines of code here and
+" " then press ``>`` several times.
+vnoremap < <gv " better indentation
+vnoremap > >gv " better indentation
+
+" Showing line numbers and length
+set number " show line numbers
+set tw=79 " width of document (used by gd)
+set nowrap " don't automatically wrap on load
+set fo-=t " don't automatically wrap text when typing
+set colorcolumn=80
+highlight ColorColumn ctermbg=233
+
+" Useful settings
+set history=700
+set undolevels=700
+
+" Editing
+set backspace=indent,eol,start  " sane backspacing
+set shiftwidth=4                " more-or-less sane indents
+set softtabstop=4               " make the <tab> key more useful
+set expandtab                   " sane default
+set noshiftround                " do NOT enforce the indent
+set autoindent                  " automatic indent
+set nosmartindent               " but no smart indent (ain't smart enough)
+set tabstop=8                   " replace one tab with 8 spaces
+"" Search should be case insensitive
+set ignorecase                  " no case sensitive
+set hlsearch
+set incsearch
+set smartcase
+
+""setlocal spell spelllang=en_us
+""setlocal spelllang=de spell
+
+" Spell checking
+" To install spell checking (http://wiki.ubuntuusers.de/VIM/Tipps)
+" - sudo apt-get install hunspell-de-de
+" - mkdir -p ~/.vim/spell
+" - In vim:   :mkspell ~/.vim/spell/de /usr/share/myspell/dicts/de-DE
+" - Prüfung aktivieren
+
+if v:version >= 700
+  set spelllang=en,de spell
+  set spellfile=~/.vim/spell.utf-8.add
+endif
+
+if has("linebreak")
+  let &sbr = nr2char(8618).' '  " Show ↪ at the beginning of wrapped lines
+endif
+
+"" Color themes
+hi SpellBad   ctermfg=Red     term=Reverse   guisp=Red     gui=undercurl ctermbg=White
+hi SpellCap   ctermfg=Green   term=Reverse   guisp=Green   gui=undercurl ctermbg=White
+hi SpellLocal ctermfg=Cyan    term=Underline guisp=Cyan    gui=undercurl ctermbg=White
+hi SpellRare  ctermfg=Magenta term=underline guisp=Magenta gui=undercurl ctermbg=White
+hi ExtraWhitespace ctermbg=red guibg=red
+hi TooLongLine ctermbg=lightgrey guibg=lightgrey
+hi Tabs       ctermbg=lightgreen guibg=lightgreen
+
+filetype plugin on
+if has('gui_running')
+    set grepprg=grep\ -nH\ $*
+    filetype indent on
+    let g:tex_flavor='latex'
+    " Disable folding in Latex
+    let Tex_FoldedSections=""
+    let Tex_FoldedEnvironments=""
+    let Tex_FoldedMisc=""
+endif
+
+"" Use markdown syntax highlighting
+"" Install to ~/.vim/bundle
+"" git clone https://github.com/plasticboy/vim-markdown.git
+
+"" Enable for .md files
+au BufRead,BufNewFile *.md set filetype=markdown
+
+" Show trailing whitespace.
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+
+" Download and untar syntax from
+" http://www.vim.org/scripts/script.php?script_id=1847
+augroup filetypedetect
+  au! BufRead,BufNewFile *nc setfiletype nc
+augroup END
+
+""Highlight long lines
+if exists('+colorcolumn')
+  set colorcolumn=80
+  hi ColorColumn ctermbg=lightgrey guibg=lightgrey
+else
+  au BufWinEnter * let w:m2=matchadd('TooLongLine', '\%>80v.\+', -1)
+endif
+
+"" Sound off
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
