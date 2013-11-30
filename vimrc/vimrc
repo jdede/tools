@@ -61,7 +61,11 @@ set expandtab                   " sane default
 set noshiftround                " do NOT enforce the indent
 set autoindent                  " automatic indent
 set nosmartindent               " but no smart indent (ain't smart enough)
-set tabstop=8                   " replace one tab with 8 spaces
+set tabstop=4                   " replace one tab by 4 spaces
+
+" Replace tabs in python with 8 spaces
+autocmd BufNewFile,BufRead *.py set tabstop=8
+
 "" Search should be case insensitive
 set ignorecase                  " no case sensitive
 set hlsearch
@@ -116,6 +120,9 @@ au BufRead,BufNewFile *.md set filetype=markdown
 
 " Show trailing whitespace.
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+
+" Show tabs
+autocmd BufWinEnter * match Tabs /\t\+/
 
 " Download and untar syntax from
 " http://www.vim.org/scripts/script.php?script_id=1847
