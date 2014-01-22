@@ -141,3 +141,11 @@ endif
 "" Sound off
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
+
+
+"" Do not use gvim in full screen mode
+if has("gui_running")
+  "" Use 85 to ensure 80 columns marker is shown regardless of the line number
+  "" at the beginning of the line
+  set lines=40 columns=85
+endif
