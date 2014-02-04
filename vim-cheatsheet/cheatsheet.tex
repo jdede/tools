@@ -1,0 +1,174 @@
+\documentclass[a4paper,10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+\usepackage[defaultsans]{droidsans}
+\usepackage[defaultmono]{droidmono}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be typewriter style
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+
+\pdfinfo{
+  /Title (vim-cheatsheet.pdf)
+  /Creator (LaTeX)
+  /Author (Jens Dede)
+  /Subject (vi)
+  /Keywords (vi, vim, gvim)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+    }
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+%My Environments
+\newtheorem{example}[section]{Example}
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\underline{Basic vim commands}} \\
+     {\tiny
+         (Based on the .vimrc from \url{http://github.com/jdede/tools/blob/master/vimrc/vimrc})
+     }
+\end{center}
+
+\section{Find and replace}
+\tiny{
+    \begin{tabularx}{\columnwidth}{|l|X|}
+        \hline
+        \texttt{:/<expr>}&Searches for <expr>\\
+        \texttt{n}&Go to next appearance of <expr>\\
+        \hline
+        \texttt{:\%s/<find>/<replace>/}&Replace <find> by <replace>\\
+        \texttt{:\%s/<find>/<replace>/g}&Replace every <find> by <replace>\\
+        \hline
+    \end{tabularx}
+}
+
+\section{Tabs and spaces}
+\tiny{With my \texttt{.vimrc} tabs are replaces by spaces. To switch the
+behavior on the fly, the following commands are quite useful.}
+\tiny{
+    \begin{tabularx}{\columnwidth}{|l|X|}
+        \hline
+        \texttt{:set noexpandtab}&Do not replace a tab by spaces\\
+        \texttt{:set expandtab}&Replace tab by spaces\\
+        \hline
+        \texttt{:set tabstop}&Print number of spaces to replace a tab\\
+        \texttt{:set tabstop=<x>}&Every tab is replaced by <x> spaces\\
+        \hline
+        \texttt{:retab}&Format current document with the current settings
+        (regarding to tabs and spaces)\\
+        \hline
+    \end{tabularx}
+}
+
+\section{CR / LF formatting}
+\tiny{Documents are opened in unix format by default. Windows Line endings are
+only detected, if all lines ends are the same. So files are opened in unix
+format as default and can be changed on demand.}
+\tiny{
+    \begin{tabularx}{\columnwidth}{|l|X|}
+        \hline
+        \texttt{:e ++ff=dos}&Reload file with dos line endings\\
+        \texttt{:e ++ff=unix}&Reload file with unix line endings\\
+        \hline
+        \texttt{:w ++ff=dos}&Save with dos line endings\\
+        \hline
+    \end{tabularx}
+}
+
+\section{Split view}
+\tiny{Split screen and work with the split view.}
+\tiny{
+    \begin{tabularx}{\columnwidth}{|l|X|}
+        \hline
+        \texttt{:split}&Open current used file in horizontal split view\\
+        \texttt{:split <filename>}&Open new file in horizontal split view\\
+        \texttt{:vsplit}&Open file in vertical split mode\\
+        \hline
+        \texttt{:only}&Close all split views but the active one\\
+        \texttt{ctrl-w <arrowkey>}&Move through the different views\\
+        \texttt{10 ctrl-w+}&Increase window size by 10 lines\\
+        \hline
+    \end{tabularx}
+}
+
+\section{Commenting source code}
+\tiny{How to block comment / uncomment source code.}
+\tiny{
+    \begin{tabularx}{\columnwidth}{|l|X|}
+        \hline
+        \texttt{ctrl-v <mark block> I \% ESC}&Comment block with \%\\
+        \texttt{ctrl-v <mark block> x}&Remove vertical aligned comment symbols\\
+        \hline
+    \end{tabularx}
+}
+
+\section{Marker}
+\tiny{How to mark a position in the text and move back later.}
+\tiny{
+    \begin{tabularx}{\columnwidth}{|l|X|}
+        \hline
+        \texttt{m[a-z]}&Set marker with id a-z. Lower case: in file, upper
+        case: unique in all open files\\
+        \texttt{'[a-z]}&Jump to marked position\\
+        \hline
+    \end{tabularx}
+}
+
+\end{multicols}
+\end{document}
