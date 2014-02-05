@@ -89,7 +89,8 @@
 \tiny{
     \begin{tabularx}{\columnwidth}{|l|X|}
         \hline
-        \texttt{:/<expr>}&Searches for <expr>\\
+        \texttt{:/<expr>}&Forward search for <expr>\\
+        \texttt{:?<expr>}&Backward search for <expr>\\
         \texttt{n}&Go to next appearance of <expr>\\
         \hline
         \texttt{:\%s/<find>/<replace>/}&Replace <find> by <replace>\\
@@ -163,9 +164,9 @@ format as default and can be changed on demand.}
 \tiny{
     \begin{tabularx}{\columnwidth}{|l|X|}
         \hline
-        \texttt{m[a-z]}&Set marker with id a-z. Lower case: in file, upper
+        \texttt{m[a-Z]}&Set marker with id a-Z. Lower case: in file, upper
         case: unique in all open files\\
-        \texttt{'[a-z]}&Jump to marked position\\
+        \texttt{'[a-Z]}&Jump to marked position\\
         \hline
     \end{tabularx}
 }
