@@ -171,5 +171,20 @@ format as default and can be changed on demand.}
     \end{tabularx}
 }
 
+\section{Execute external commands}
+\tiny{How to start an external shell or execute a command without leaving vim.}
+\tiny{
+    \begin{tabularx}{\columnwidth}{|l|X|}
+        \hline
+        \texttt{:sh}&Open a shell. Type exit to return to vim\\
+        \hline
+        \texttt{:! <command>}&Execute <command> in shell. Return to vim after
+        command has finished\\
+        \texttt{:! <command> \%}&Execute command with current edited file as
+        parameter\\
+        \hline
+    \end{tabularx}
+}
+
 \end{multicols}
 \end{document}
