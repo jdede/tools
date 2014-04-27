@@ -27,3 +27,8 @@ vim-cheatsheet
 --------------
 
 A latex document with some useful commands for my vimrc
+
+misc
+----
+
+Several tools. Perhaps they help someone...
