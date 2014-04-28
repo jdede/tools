@@ -87,7 +87,7 @@ class executeThread(threading.Thread):
                 executeThread.breakSimulation = True
                 executeThread.breakSimulationLock.release()
 
-            self.log("Path \"" + cmd["path"] + "\"done, return code: " + \
+            self.log("Path \"" + cmd["path"] + "\" done, return code: " + \
                     str(ret))
 
         except KeyboardInterrupt:
