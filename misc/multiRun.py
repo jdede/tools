@@ -80,6 +80,9 @@ class executeThread(threading.Thread):
             proc.wait()
             ret = proc.returncode
 
+            # Remove simulation file. Copy available in the base directory
+            os.remove(os.path.join(cmd['path'], cmd['cmd']))
+
             # Return value indicated error and user marked that this breaks
             # execution of remaining simulations
             if ret and cmd["break"]:
@@ -169,10 +172,15 @@ for thread in threads:
     thread.start()
 
 cmds = []
+
+# Copy one version of the app to the base directory. The other copies can be
+# removed later
+shutil.copy(args.progname, os.path.join(os.path.abspath("."), simulationFolderName))
+
 # Generate a separate command for each simulation run. Create corresponding
 # folder, execute output inside this folder
 for i in range(args.runs):
-    progpath = os.path.join(os.path.abspath("."),simulationFolderName, "run_" + str(i+1))
+    progpath = os.path.join(os.path.abspath("."), simulationFolderName, "run_" + str(i+1))
     os.makedirs(progpath)
     shutil.copy(args.progname, progpath)
     metainfo = {}
