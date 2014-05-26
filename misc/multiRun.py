@@ -74,7 +74,7 @@ class executeThread(threading.Thread):
                     "\" in path \"" + cmd['path'] + "\"")
 
             # Start process
-            proc = subprocess.Popen(['java', '-jar', cmd['cmd']],
+            proc = subprocess.Popen(['java','-Djava.awt.headless=true', '-jar', cmd['cmd']],
                     stdout=stdoutFile, stderr=stderrFile, cwd=cmd['path'])
 
             proc.wait()
