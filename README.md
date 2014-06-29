@@ -32,3 +32,8 @@ misc
 ----
 
 Several tools. Maybe they will help someone...
+
+fun
+---
+
+Fun scripts ;-)
