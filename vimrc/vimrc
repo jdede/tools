@@ -99,6 +99,7 @@ set sidescroll=1
 " - sudo apt-get install hunspell-de-de
 " - mkdir -p ~/.vim/spell
 " - In vim:   :mkspell ~/.vim/spell/de /usr/share/myspell/dicts/de-DE
+" - or    :   :mkspell ~/.vim/spell/de /usr/share/hunspell/de_DE
 " - Prüfung aktivieren
 
 if v:version >= 700
