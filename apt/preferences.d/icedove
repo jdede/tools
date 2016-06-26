@@ -1,0 +1,8 @@
+Package: icedove
+Pin: release a=unstable
+Pin-Priority: 700
+
+Package: icedove-l10n-de
+Pin: release a=unstable
+Pin-Priority: 700
+

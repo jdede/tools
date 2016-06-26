@@ -1,0 +1,16 @@
+deb http://ftp.uni-kl.de/debian/ testing main non-free contrib
+deb-src http://ftp.uni-kl.de/debian/ testing main non-free contrib
+
+deb http://security.debian.org/ testing/updates main contrib non-free
+deb-src http://security.debian.org/ testing/updates main contrib non-free
+
+deb http://ftp.uni-kl.de/debian/ testing-updates main contrib non-free
+deb-src http://ftp.uni-kl.de/debian/ testing-updates main contrib non-free
+
+# Unstable, via pinning auf low prio
+deb http://ftp.us.debian.org/debian unstable main contrib non-free
+
+# Experimental, via pinning auf low prio
+deb http://ftp.us.debian.org/debian experimental main contrib non-free
+
+

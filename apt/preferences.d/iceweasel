@@ -1,0 +1,7 @@
+Package: iceweasel
+Pin: release a=unstable
+Pin-Priority: 700
+
+Package: iceweasel-l10n-de
+Pin: release a=unstable
+Pin-Priority: 700
