@@ -56,8 +56,9 @@ vnoremap > >gv " better indentation
 " Showing line numbers and length
 set number " show line numbers
 set tw=79 " width of document (used by gd)
-"set nowrap " don't automatically wrap on load
-"set fo-=t " don't automatically wrap text when typing
+set nowrap " don't automatically wrap on load
+set fo-=t " don't automatically wrap text when typing
+set wrap linebreak nolist "Break lines
 
 set colorcolumn=80
 highlight ColorColumn ctermbg=233
@@ -99,7 +100,6 @@ set sidescroll=1
 " - sudo apt-get install hunspell-de-de
 " - mkdir -p ~/.vim/spell
 " - In vim:   :mkspell ~/.vim/spell/de /usr/share/myspell/dicts/de-DE
-" - or    :   :mkspell ~/.vim/spell/de /usr/share/hunspell/de_DE
 " - Prüfung aktivieren
 
 if v:version >= 700
@@ -146,6 +146,16 @@ set noerrorbells visualbell t_vb=
 au GUIEnter * set visualbell t_vb=
 set visualbell
 
+"" Set mapping for soft linebreaks
+map <silent> <Up> gk
+imap <silent> <Up> <C-o>gk
+map <silent> <Down> gj
+imap <silent> <Down> <C-o>gj
+map <silent> <home> g<home>
+imap <silent> <home> <C-o>g<home>
+map <silent> <End> g<End>
+imap <silent> <End> <C-o>g<End>
+
 "" Do not use gvim in full screen mode
 if has("gui_running")
   "" Use 85 to ensure 80 columns marker is shown regardless of the line number
@@ -153,3 +163,7 @@ if has("gui_running")
   set lines=40 columns=85
 endif
 
+"" Own commands (must start with capital letter)
+
+"" Remove trailing whitespaces
+command Rmws %s/\s\+$//
