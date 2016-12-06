@@ -26,7 +26,7 @@ set pastetoggle=<F2>
 set clipboard=unnamed
 
 " Rebind <Leader> key
-" " I like to have it here becuase it is easier to reach than the default and
+" " I like to have it here because it is easier to reach than the default and
 " " it is next to ``m`` and ``n`` which I use for navigating between tabs.
 let mapleader = ","
 
@@ -100,6 +100,7 @@ set sidescroll=1
 " - sudo apt-get install hunspell-de-de
 " - mkdir -p ~/.vim/spell
 " - In vim:   :mkspell ~/.vim/spell/de /usr/share/myspell/dicts/de-DE
+" - new distributions: :mkspell ~/.vim/spell/de /usr/share/hunspell/de-DE
 " - Prüfung aktivieren
 
 if v:version >= 700
