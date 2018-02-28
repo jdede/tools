@@ -2,6 +2,9 @@
 set nocompatible
 syntax enable
 
+" Enable the following settings for dark screens
+"set background=dark
+
 " With some ideas from Martin Brochhaus' git repo:
 " https://github.com/mbrochh/vim-as-a-python-ide
 
