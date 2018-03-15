@@ -1,7 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Bingo creator version 0.1
+Bingo creator version 0.2
 Jens Dede, mail@jdede.de
 
 Bingo is a famous game - especially for (boring) meetings. Collect some typical
@@ -12,6 +12,7 @@ game sheets.
 You will have a lot of fun during the next meeting!
 
 CHANGELOG:
+    * 0.2   Migrated to Python 3
     * 0.1   Initial version
 
 TODO:
@@ -32,7 +33,6 @@ parser.add_argument('--prefix', '-p', dest='prefix', default='bingo-', help='Set
 parser.add_argument('--number', '-n', dest='numberFiles', default=5, type=int, help='Number of created sheets. Default: 5')
 parser.add_argument('--rows', '-r', dest='rows', default=5, type=int, help='Number of rows')
 parser.add_argument('--columns', '-c', dest='columns', default=5, type=int, help='Number of columns')
-parser.add_argument('--encoding', dest='encoding', default='utf-8', help='Set encoding of input file. Default: UTF-8')
 args = parser.parse_args()
 
 # Read in words from file. One word - one line
@@ -49,7 +49,7 @@ f.close()
 
 # Check if we have enough words for the requested structure
 if len(wordlist) < (args.rows*args.columns):
-    print "Not enough elements to create bingo. Exiting"
+    print("Not enough elements to create bingo. Exiting")
     sys.exit(0)
 # Okay, lets start generating some independent games
 for loop in range(args.numberFiles):
@@ -78,7 +78,7 @@ for loop in range(args.numberFiles):
     ax.yaxis.set_major_formatter(ticker.NullFormatter())
 
     if args.title:
-        plt.title(unicode(args.title, args.encoding))
+        plt.title(args.title)
 
     plt.tight_layout()
     plt.axis([0, args.columns, 0, args.rows])
@@ -87,7 +87,7 @@ for loop in range(args.numberFiles):
     # Print the data
     for r in range(args.rows):
         for c in range(args.columns):
-            plt.text(c+.5, r+.5, unicode(outputStructure[r][c], args.encoding), ha='center', va='center')
+            plt.text(c+.5, r+.5, outputStructure[r][c], ha='center', va='center')
 
     plt.savefig(args.prefix + str(loop+1) + ".pdf")
 
